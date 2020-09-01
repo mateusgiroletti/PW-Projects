@@ -1,3 +1,10 @@
+<?php
+    require_once('../src/dao/CategoriaDAO.php');
+    
+    $stmt = CategoriaDAO::getALL();
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -27,58 +34,30 @@
                 </aside>
 
                 <div class="col-md-9">
-                    <h2>Protudos</h2>
+                    <h2>Cadastro de Categorias <a href="/categorias/new.php" class="btn btn-info float-right">Nova Categoria</a></h2>
 
-                    <div class="row">
-                        <div class="col-md-4 produto">
-                            <div class="border">
-                                <h3>Apartamento</h3>
-                                <img src="/img/apartamento.jpg" alt="Apartamento" />
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum unde autem explicabo sed, accusantium reiciendis, perferendis veniam.</p>
-                                <p><a href="#" class="btn btn-success">Ver mais</a></p>
-                            </div>
-                        </div>
-                        <div class="col-md-4 produto">
-                            <div class="border">
-                                <h3>Carro</h3>
-                                <img src="/img/carro.jpg" alt="Apartamento" />
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum unde autem explicabo sed, accusantium reiciendis, perferendis veniam.</p>
-                                <p><a href="#" class="btn btn-success">Ver mais</a></p>
-                            </div>
-                        </div>
-                        <div class="col-md-4 produto">
-                            <div class="border">
-                                <h3>Sofá</h3>
-                                <img src="/img/sofa.jpg" alt="Apartamento" />
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum unde autem explicabo sed, accusantium reiciendis, perferendis veniam.</p>
-                                <p><a href="#" class="btn btn-success">Ver mais</a></p>
-                            </div>
-                        </div>
-                        <div class="col-md-4 produto">
-                            <div class="border">
-                                <h3>Carro</h3>
-                                <img src="/img/carro.jpg" alt="Apartamento" />
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum unde autem explicabo sed, accusantium reiciendis, perferendis veniam.</p>
-                                <p><a href="#" class="btn btn-success">Ver mais</a></p>
-                            </div>
-                        </div>
-                        <div class="col-md-4 produto">
-                            <div class="border">
-                                <h3>Sofá</h3>
-                                <img src="/img/sofa.jpg" alt="Apartamento" />
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum unde autem explicabo sed, accusantium reiciendis, perferendis veniam.</p>
-                                <p><a href="#" class="btn btn-success">Ver mais</a></p>
-                            </div>
-                        </div>
-                        <div class="col-md-4 produto">
-                            <div class="border">
-                                <h3>Apartamento</h3>
-                                <img src="/img/apartamento.jpg" alt="Apartamento" />
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum unde autem explicabo sed, accusantium reiciendis, perferendis veniam.</p>
-                                <p><a href="#" class="btn btn-success">Ver mais</a></p>
-                            </div>
-                        </div>
-                    </div>
+                    <table class="table">
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Ações</th>
+                        </tr>
+
+                        <?php while ($row = $stmt->fetch(PDO::FETCH_OBJ)) : ?>
+                            <tr>
+                                <td><?= $row->id?></td>
+                                <td><?= $row->nome?></td>
+                                <td>
+                                    <a href="/categorias/edit.php?id=<?= $row->id?>" class="btn btn-sm btn-warning">Editar</a>
+                                    <a href="/categorias/destroy.php?id=<?= $row->id?>" class="btn btn-sm btn-danger" onclick="return confirm('Você realmente excluir a categoria: <?= $row->nome?>')">Excluir</a>
+                            </tr>
+
+                        <?php endwhile ?>
+
+                    </table>
+
+
+
                 </div>
             </div>
         </div>
