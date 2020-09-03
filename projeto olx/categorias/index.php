@@ -1,6 +1,6 @@
 <?php
     require_once('../src/dao/CategoriaDAO.php');
-    
+
     $stmt = CategoriaDAO::getALL();
 
 ?>
@@ -23,15 +23,7 @@
     <section id="content">
         <div class="container">
             <div class="row">
-                <aside class="col-md-3">
-                    <h2>Categorias</h2>
-                    <ul>
-                        <li><a href="">Imóveis</a></li>
-                        <li><a href="">Carros</a></li>
-                        <li><a href="">Caminhões</a></li>
-                        <li><a href="">Móveis</a></li>
-                    </ul>
-                </aside>
+                <?php include("../partials/_sidebar.php") ?>
 
                 <div class="col-md-9">
                     <h2>Cadastro de Categorias <a href="/categorias/new.php" class="btn btn-info float-right">Nova Categoria</a></h2>

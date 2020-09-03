@@ -1,5 +1,5 @@
 <?php 
-    require_once('../src/utils/ConnectionFactory.php');
+    require_once($_SERVER['DOCUMENT_ROOT'] . '/src/utils/ConnectionFactory.php');
    
     class CategoriaDAO{
 

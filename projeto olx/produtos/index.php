@@ -1,7 +1,15 @@
+<?php
+    require_once('../src/dao/ProdutoDAO.php');
+
+    $stmt = ProdutoDAO::getALL();
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
+
     <?php include("../partials/_head.php"); ?>
 
     <title>Mini OLX - Produtos</title>
@@ -15,69 +23,40 @@
     <section id="content">
         <div class="container">
             <div class="row">
-                <aside class="col-md-3">
-                    <h2>Categorias</h2>
-                    <ul>
-                        <li><a href="">Imóveis</a></li>
-                        <li><a href="">Carros</a></li>
-                        <li><a href="">Caminhões</a></li>
-                        <li><a href="">Móveis</a></li>
-                    </ul>
-                </aside>
+                <?php include("../partials/_sidebar.php") ?>
 
                 <div class="col-md-9">
-                    <h2>Protudos</h2>
+                    <h2>Cadastro de produtos <a href="/produtos/new.php" class="btn btn-info float-right">Novo Produto</a></h2>
 
-                    <div class="row">
-                        <div class="col-md-4 produto">
-                            <div class="border">
-                                <h3>Apartamento</h3>
-                                <img src="/img/apartamento.jpg" alt="Apartamento" />
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum unde autem explicabo sed, accusantium reiciendis, perferendis veniam.</p>
-                                <p><a href="#" class="btn btn-success">Ver mais</a></p>
-                            </div>
-                        </div>
-                        <div class="col-md-4 produto">
-                            <div class="border">
-                                <h3>Carro</h3>
-                                <img src="/img/carro.jpg" alt="Apartamento" />
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum unde autem explicabo sed, accusantium reiciendis, perferendis veniam.</p>
-                                <p><a href="#" class="btn btn-success">Ver mais</a></p>
-                            </div>
-                        </div>
-                        <div class="col-md-4 produto">
-                            <div class="border">
-                                <h3>Sofá</h3>
-                                <img src="/img/sofa.jpg" alt="Apartamento" />
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum unde autem explicabo sed, accusantium reiciendis, perferendis veniam.</p>
-                                <p><a href="#" class="btn btn-success">Ver mais</a></p>
-                            </div>
-                        </div>
-                        <div class="col-md-4 produto">
-                            <div class="border">
-                                <h3>Carro</h3>
-                                <img src="/img/carro.jpg" alt="Apartamento" />
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum unde autem explicabo sed, accusantium reiciendis, perferendis veniam.</p>
-                                <p><a href="#" class="btn btn-success">Ver mais</a></p>
-                            </div>
-                        </div>
-                        <div class="col-md-4 produto">
-                            <div class="border">
-                                <h3>Sofá</h3>
-                                <img src="/img/sofa.jpg" alt="Apartamento" />
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum unde autem explicabo sed, accusantium reiciendis, perferendis veniam.</p>
-                                <p><a href="#" class="btn btn-success">Ver mais</a></p>
-                            </div>
-                        </div>
-                        <div class="col-md-4 produto">
-                            <div class="border">
-                                <h3>Apartamento</h3>
-                                <img src="/img/apartamento.jpg" alt="Apartamento" />
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum unde autem explicabo sed, accusantium reiciendis, perferendis veniam.</p>
-                                <p><a href="#" class="btn btn-success">Ver mais</a></p>
-                            </div>
-                        </div>
-                    </div>
+                    <table class="table">
+                        <tr>
+                            <th>ID</th>
+                            <th>Thumbnail</th>
+                            <th>Nome</th>
+                            <th>Preço</th>
+                            <th>Categoria</th>
+                            <th>Ações</th>
+                        </tr>
+
+                        <?php while ($row = $stmt->fetch(PDO::FETCH_OBJ)) : ?>
+                            <tr>
+                                <td><?= $row->id?></td>
+                                <td><?= $row->imagem?></td>
+                                <td><?= $row->nome?></td>
+                                <td>R$ <?= $row->preco?></td>
+                                <td><?= $row->categoria_nome?></td>
+                                <td>
+                                    <a href="/produtos/show.php?id=<?= $row->id?>" class="btn btn-sm btn-info">Mostrar</a>
+                                    <a href="/produtos/edit.php?id=<?= $row->id?>" class="btn btn-sm btn-warning">Editar</a>
+                                    <a href="/produtos/destroy.php?id=<?= $row->id?>" class="btn btn-sm btn-danger" onclick="return confirm('Você realmente excluir o produto: <?= $row->nome?>')">Excluir</a>
+                            </tr>
+
+                        <?php endwhile ?>
+
+                    </table>
+
+
+
                 </div>
             </div>
         </div>

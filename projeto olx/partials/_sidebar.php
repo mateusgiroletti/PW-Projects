@@ -1,9 +1,16 @@
+<?php
+    require_once($_SERVER['DOCUMENT_ROOT'] . '/src/dao/CategoriaDAO.php');
+
+    $stmt_sidebar_categoria = CategoriaDAO::getALL();
+
+?>
+
+
 <aside class="col-md-3">
     <h2>Categorias</h2>
     <ul>
-        <li><a href="">Imóveis</a></li>
-        <li><a href="">Carros</a></li>
-        <li><a href="">Caminhões</a></li>
-        <li><a href="">Móveis</a></li>
+        <?php while ($categoria = $stmt_sidebar_categoria->fetch(PDO::FETCH_OBJ)) : ?>
+            <li><a href=""><?= $categoria->nome ?></a></li>
+        <?php endwhile ?>
     </ul>
 </aside>
