@@ -1,3 +1,16 @@
+<?php
+    require_once($_SERVER['DOCUMENT_ROOT'] . '/src/dao/ProdutoDAO.php');
+
+    if(isset($_GET['categoria_id'])){
+        $stmt_produtos = ProdutoDAO::getByCategoriaId(($_GET['categoria_id']));
+
+    }else{
+        $stmt_produtos = ProdutoDAO::getALL();
+
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -20,54 +33,23 @@
                     <h2>Protudos</h2>
 
                     <div class="row">
+                        <?php while ($produto = $stmt_produtos->fetch(PDO::FETCH_OBJ)) : ?>
+ 
                         <div class="col-md-4 produto">
                             <div class="border">
-                                <h3>Apartamento</h3>
-                                <img src="/img/apartamento.jpg" alt="Apartamento" />
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum unde autem explicabo sed, accusantium reiciendis, perferendis veniam.</p>
-                                <p><a href="#" class="btn btn-success">Ver mais</a></p>
+                                <h4><?= $produto->nome?></h4>
+
+                                <?php if (($produto->url_imagem_produto)): ?>
+                                    <img src="<?= $produto->url_imagem_produto ?>" alt="<?= $produto->nome ?>" />
+                                <?php else: ?>
+                                    <img src="img/no-image.png" />
+                                <?php endif ?>
+                                
+                                <p><?= substr($produto->descricao, 0, 140) . "..."?></p>
+                                <p><a href="/produtos/show.php?id=<?= $produto->id ?>" class="btn btn-success">Ver mais</a></p>
                             </div>
                         </div>
-                        <div class="col-md-4 produto">
-                            <div class="border">
-                                <h3>Carro</h3>
-                                <img src="/img/carro.jpg" alt="Apartamento" />
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum unde autem explicabo sed, accusantium reiciendis, perferendis veniam.</p>
-                                <p><a href="#" class="btn btn-success">Ver mais</a></p>
-                            </div>
-                        </div>
-                        <div class="col-md-4 produto">
-                            <div class="border">
-                                <h3>Sofá</h3>
-                                <img src="/img/sofa.jpg" alt="Apartamento" />
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum unde autem explicabo sed, accusantium reiciendis, perferendis veniam.</p>
-                                <p><a href="#" class="btn btn-success">Ver mais</a></p>
-                            </div>
-                        </div>
-                        <div class="col-md-4 produto">
-                            <div class="border">
-                                <h3>Carro</h3>
-                                <img src="/img/carro.jpg" alt="Apartamento" />
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum unde autem explicabo sed, accusantium reiciendis, perferendis veniam.</p>
-                                <p><a href="#" class="btn btn-success">Ver mais</a></p>
-                            </div>
-                        </div>
-                        <div class="col-md-4 produto">
-                            <div class="border">
-                                <h3>Sofá</h3>
-                                <img src="/img/sofa.jpg" alt="Apartamento" />
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum unde autem explicabo sed, accusantium reiciendis, perferendis veniam.</p>
-                                <p><a href="#" class="btn btn-success">Ver mais</a></p>
-                            </div>
-                        </div>
-                        <div class="col-md-4 produto">
-                            <div class="border">
-                                <h3>Apartamento</h3>
-                                <img src="/img/apartamento.jpg" alt="Apartamento" />
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum unde autem explicabo sed, accusantium reiciendis, perferendis veniam.</p>
-                                <p><a href="#" class="btn btn-success">Ver mais</a></p>
-                            </div>
-                        </div>
+                        <?php endwhile ?>
                     </div>
                 </div>
             </div>

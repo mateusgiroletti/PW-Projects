@@ -46,7 +46,15 @@
                         <dd><?= $produto->categoria_nome ?></dd>
                     
                         <dt>Imagem</dt>
-                        <dd><img src="/img/carro.jpg" alt="<?=$produto->nome ?>"/></dd>
+                        <dd>
+
+                            <?php if (($produto->url_imagem_produto)): ?>
+                                <img src="<?= $produto->url_imagem_produto ?>" alt="<?= $produto->nome ?>" />
+                            <?php else: ?>
+                                    <img src="/img/no-image.png" />
+                            <?php endif ?>
+
+                        </dd>
 
                         <dt>Descrição</dt>
                         <dd><?= $produto->descricao ?></dd>

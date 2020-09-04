@@ -23,6 +23,18 @@
             
         }
 
+        public static function getByCategoriaId($categoria_id){
+            
+            $con = ConnectionFactory::getConnection();
+
+            $stmt = $con->prepare("SELECT * FROM produtos WHERE categoria_id = :categoria_id");
+            $stmt->bindParam(':categoria_id', $categoria_id, PDO::PARAM_INT);
+            $stmt->execute();
+
+            return $stmt;
+
+        }
+
         public static function create($nome, $preco, $imagem, $descricao, $categoria_id){
             $con = ConnectionFactory::getConnection();
 
