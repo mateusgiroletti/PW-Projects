@@ -41,7 +41,13 @@
                         <?php while ($row = $stmt->fetch(PDO::FETCH_OBJ)) : ?>
                             <tr>
                                 <td><?= $row->id?></td>
-                                <td><?= $row->imagem?></td>
+                                <td>
+                                <?php if (($row->url_imagem_produto)) : ?>
+                                    <img src="<?= $row->url_imagem_produto ?>" alt="<?= $row->nome ?>" />
+                                <?php else : ?>
+                                    <img src="/img/no-image.png" />
+                                <?php endif ?>
+                                </td>
                                 <td><?= $row->nome?></td>
                                 <td>R$ <?= $row->preco?></td>
                                 <td><?= $row->categoria_nome?></td>

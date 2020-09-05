@@ -2,6 +2,13 @@ textarea{
     width: 100%;
 }
 
+img{
+    max-width: 100%;
+}
+
+table img{
+    max-width: 100px;
+}
 .show-produto .btn{
     margin-left: 10px;
 }
