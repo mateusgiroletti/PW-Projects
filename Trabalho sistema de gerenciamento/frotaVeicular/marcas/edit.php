@@ -20,7 +20,7 @@ $marca = $stmt->fetch(PDO::FETCH_OBJ);
 
     <?php include("../partials/_head.php"); ?>
 
-    <title>Mini OLX - Marcas</title>
+    <title>Frota Veicular - Marcas</title>
 </head>
 
 <body>

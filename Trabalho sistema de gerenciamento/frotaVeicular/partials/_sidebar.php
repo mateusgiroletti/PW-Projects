@@ -13,7 +13,7 @@ $stmt_sidebar_marca = MarcaDAO::getALL();
     <ul class="nav flex-column">
         <?php while ($marca_sidebar = $stmt_sidebar_marca->fetch(PDO::FETCH_OBJ)) : ?>
             <li class="nav-item">
-                <a class="nav-link active" href="/marca_id?=<?= $marca_sidebar->id ?>"><?= $marca_sidebar->nome ?></a>
+                <a class="nav-link active" href="/?marca_id=<?= $marca_sidebar->id ?>"><?= $marca_sidebar->nome ?></a>
             </li>
         <?php endwhile ?>
     </ul>

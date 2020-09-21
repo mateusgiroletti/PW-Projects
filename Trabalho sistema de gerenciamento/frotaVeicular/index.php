@@ -1,11 +1,19 @@
 <?php
+
+use App\utils\FlashMessages;
+
 require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 require $_SERVER['DOCUMENT_ROOT'] . '/bootstrap.php';
+
+if (!$_SESSION['logado']) {
+    FlashMessages::setMessage("você precisa estar logado para executar essa ação", "error");
+    header("location: login/sign_in.php");
+    exit(0);
+}
 
 use App\dao\VeiculoDAO;
 
 if (isset($_GET['marca_id'])) {
-    var_dump($_GET['marca_id']);
     $stmt_veiculos = VeiculoDAO::getByMarcaId(($_GET['marca_id']));
 } else {
     $stmt_veiculos = VeiculoDAO::getALL();
@@ -30,10 +38,10 @@ if (isset($_GET['marca_id'])) {
         <div class="container">
             <div class="row">
                 <?php include("partials/_sidebar.php") ?>
-
+                
                 <div class="col-md-9">
                     <h2>Veículos</h2>
-
+                    
                     <div class="row">
                         <?php while ($veiculo = $stmt_veiculos->fetch(PDO::FETCH_OBJ)) : ?>
 
@@ -47,7 +55,7 @@ if (isset($_GET['marca_id'])) {
                                         <img src="img/no-image.png" />
                                     <?php endif ?>
                                     Ano de Frabricação: <?= $veiculo->ano_fabricacao ?>
-                                    Preço: R$ <?= $veiculo->preco?>
+                                    Preço: R$ <?= $veiculo->preco ?>
                                     <p><?= substr($veiculo->descricao, 0, 140) . "..." ?></p>
                                     <p><a href="/veiculos/show.php?id=<?= $veiculo->id ?>" class="btn btn-success">Ver mais</a></p>
                                 </div>

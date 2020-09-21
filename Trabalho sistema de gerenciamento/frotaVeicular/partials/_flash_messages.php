@@ -11,7 +11,7 @@ $infos = FlashMessages::getMessages();
 ?>
 
 <?php if (isset($errors)) : ?>
-    <ul class="alert alert-danger">
+    <ul class="alert alert-danger" style="list-style: none;">
         <?php foreach ($errors as $e) : ?>
             <li><?= $e ?></li>
         <?php endforeach ?>
@@ -19,7 +19,7 @@ $infos = FlashMessages::getMessages();
 <?php endif ?>
 
 <?php if (isset($infos)) : ?>
-    <ul class="alert alert-info">
+    <ul class="alert alert-info" style="list-style: none;">
         <?php foreach ($infos as $i) : ?>
             <li><?= $i ?></li>
         <?php endforeach ?>

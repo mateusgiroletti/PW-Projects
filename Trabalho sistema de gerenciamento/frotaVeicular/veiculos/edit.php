@@ -12,8 +12,6 @@ $stmt_mac = MarcaDAO::getALL();
 $stmt_veic = VeiculoDAO::getByID($id);
 $veiculo = $stmt_veic->fetch(PDO::FETCH_OBJ);
 
-$erro = isset($_GET['erro']) ? $_GET['erro'] : null;
-
 ?>
 
 
